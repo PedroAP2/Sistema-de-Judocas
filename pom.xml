@@ -11,76 +11,192 @@
         </repository>
   </repositories>
 
-  
+
   <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>local.lib</groupId>
-            <artifactId>genesis-annotation</artifactId>
-            <version>3.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/genesis/dist/genesis-annotation.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>forms</artifactId>
-            <version>1.9.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/forms.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.db4o</groupId>
-            <artifactId>db4o</artifactId>
-            <version>7.4.106.13438</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/db4o-7.4.106.13438-java5.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.genesis</groupId>
-            <artifactId>genesis-client-swing</artifactId>
-            <version>3.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/genesis/dist/genesis-client-swing-3.2.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.genesis</groupId>
-            <artifactId>genesis-client</artifactId>
-            <version>3.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/genesis/dist/genesis-client-3.2.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.3.3</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/jcalendar-1.3.3.jar</systemPath>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <source>20</source>
-                    <target>20</target>
-                </configuration>
-            </plugin>
+    <!-- JUnit 4 dependency for testing -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version> <!-- ou outra versão compatível -->
+        <scope>test</scope>
+    </dependency>
 
 
+    <!-- Db4o -->
+    <dependency>
+        <groupId>com.db4o</groupId>
+        <artifactId>db4o-java5</artifactId>
+        <version>7.4.106</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/db4o-7.4.106.13438-java5.jar</systemPath>
+    </dependency>
 
-        <plugin>
+    <!-- JGoodies Forms -->
+    <dependency>
+        <groupId>com.jgoodies</groupId>
+        <artifactId>jgoodies-forms</artifactId>
+        <version>1.8.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/forms.jar</systemPath>
+    </dependency>
+
+    <!-- JCalendar -->
+    <dependency>
+        <groupId>com.toedter</groupId>
+        <artifactId>jcalendar</artifactId>
+        <version>1.3.3</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/jcalendar-1.3.3.jar</systemPath>
+    </dependency>
+
+    <!-- PgsLookAndFeel -->
+    <dependency>
+        <groupId>com.pgs</groupId>
+        <artifactId>lookandfeel</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/PgsLookAndFeel.jar</systemPath>
+    </dependency>
+
+    <!-- TableLayout -->
+    <dependency>
+        <groupId>com.tablelayout</groupId>
+        <artifactId>tablelayout</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/TableLayout.jar</systemPath>
+    </dependency>
+
+    <!-- TableLayout Javadoc -->
+    <dependency>
+        <groupId>com.tablelayout</groupId>
+        <artifactId>tablelayout-javadoc</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/TableLayout-javadoc.jar</systemPath>
+    </dependency>
+
+    <!-- TableLayout Source -->
+    <dependency>
+        <groupId>com.tablelayout</groupId>
+        <artifactId>tablelayout-src</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/TableLayout-src.jar</systemPath>
+    </dependency>
+
+        <!-- Genesis: Annotation JDK5 -->
+    <dependency>
+        <groupId>genesis</groupId>
+        <artifactId>genesis-annotation-jdk5</artifactId>
+        <version>3.2</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/dist/genesis-annotation-jdk5-3.2.jar</systemPath>
+    </dependency>
+
+    <!-- Genesis: Client -->
+    <dependency>
+        <groupId>genesis</groupId>
+        <artifactId>genesis-client</artifactId>
+        <version>3.2</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/dist/genesis-client-3.2.jar</systemPath>
+    </dependency>
+
+    <!-- Genesis: Client Swing -->
+    <dependency>
+        <groupId>genesis</groupId>
+        <artifactId>genesis-client-swing</artifactId>
+        <version>3.2</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/dist/genesis-client-swing-3.2.jar</systemPath>
+    </dependency>
+
+    <!-- Genesis: Shared Annotated -->
+    <dependency>
+        <groupId>genesis</groupId>
+        <artifactId>genesis-shared-annotated</artifactId>
+        <version>3.2</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/dist/genesis-shared-annotated-3.2.jar</systemPath>
+    </dependency>
+
+    <!-- Commons Beanutils -->
+    <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.7</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/lib/commons/commons-beanutils-1.7.jar</systemPath>
+    </dependency>
+
+    <!-- Commons Logging -->
+    <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/lib/commons/commons-logging-1.1.jar</systemPath>
+    </dependency>
+
+    <!-- Reusable Components -->
+    <dependency>
+        <groupId>commons</groupId>
+        <artifactId>reusable-components</artifactId>
+        <version>20060810</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/lib/commons/reusable-components-20060810.jar</systemPath>
+    </dependency>
+
+    <!-- Backport 175 -->
+    <dependency>
+        <groupId>backport175</groupId>
+        <artifactId>backport175</artifactId>
+        <version>1.1.RC1-snapshot</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/genesis/lib/backport175/backport175-1.1.RC1-snapshot.jar</systemPath>
+    </dependency>
+
+
+  </dependencies>
+
+
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>test</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>icones/icon_16x16</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>icones/icon_32x32</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.10</version>
+            <version>0.8.8</version>
             <executions>
                 <execution>
                     <goals>
@@ -96,8 +212,6 @@
                 </execution>
             </executions>
         </plugin>
-
-
-        </plugins>
+    </plugins>
   </build>
 </project>

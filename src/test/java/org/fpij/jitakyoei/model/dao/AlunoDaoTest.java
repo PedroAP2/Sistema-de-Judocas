@@ -14,14 +14,6 @@ import org.junit.Test;
 
 public class AlunoDaoTest {
 
-    @Test
-    public void testDummy() {
-        Aluno aluno = new Aluno(); // Cria um objeto de Aluno vazio
-        assertNotNull(aluno); // Apenas verifica se o objeto não é nulo
-    }
-}
-/*public class AlunoDaoTest {
-
     private static DAO<Aluno> alunoDao;
     private static Aluno aluno;
 
@@ -89,4 +81,4 @@ public class AlunoDaoTest {
         assertNotNull(resultadoBusca);
         assertEquals(1, resultadoBusca.size());
     }
-}*/
+}

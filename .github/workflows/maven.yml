@@ -27,7 +27,8 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+        
+    - name: Build and Test with Maven
       run: mvn clean install
 
     - name: Run JUnit tests
@@ -70,5 +71,3 @@ jobs:
       run: |
         echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
         echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
-
-

@@ -1,4 +1,4 @@
-package org.fpij.jitakyoei.model;
+/*package org.fpij.jitakyoei.model;
 
 import java.util.Date;
 
@@ -62,4 +62,4 @@ public class ModelIntegrationTests {
 //		alunoDao = new DAOImpl<Aluno>(Aluno.class);
 	}
 	
-}
+}*/

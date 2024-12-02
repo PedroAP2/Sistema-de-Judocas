@@ -28,13 +28,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Instalar dependências locais
-      run: |
-        mvn install:install-file -Dfile=lib/genesis/genesis-annotation-jdk14-3.2.jar -DgroupId=genesis -DartifactId=genesis-annotation-jdk14 -Dversion=3.2 -Dpackaging=jar
-        mvn install:install-file -Dfile=lib/genesis/genesis-annotation-jdk5-3.2.jar -DgroupId=genesis -DartifactId=genesis-annotation-jdk5 -Dversion=3.2 -Dpackaging=jar
-        # Repita para cada JAR necessário
-
-        
     - name: Build with Maven
       run: mvn clean install
 

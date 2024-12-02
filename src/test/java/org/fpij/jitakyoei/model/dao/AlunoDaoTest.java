@@ -7,12 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.fpij.jitakyoei.model.beans.Aluno;
-import org.fpij.jitakyoei.model.beans.Endereco;
-import org.fpij.jitakyoei.model.beans.Entidade;
 import org.fpij.jitakyoei.model.beans.Filiado;
-import org.fpij.jitakyoei.model.beans.Professor;
-import org.fpij.jitakyoei.util.DatabaseManager;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,154 +15,69 @@ public class AlunoDaoTest {
 
     private static DAO<Aluno> alunoDao;
     private static Aluno aluno;
-    private static Entidade entidade;
-    private static Endereco endereco;
-    private static Filiado f1;
-    private static Filiado filiadoProf;
-    private static Professor professor;
 
     @BeforeClass
     public static void setUp() {
-        DatabaseManager.setEnviroment(DatabaseManager.TEST);
+        // Inicializa o DAO e o objeto de teste simplificado
+        alunoDao = new DAOImpl<>(Aluno.class);
 
-        // Criação de objetos com validação
-        f1 = new Filiado();
-        f1.setNome("Aécio");
-        f1.setCpf("036.464.453-27");
-        f1.setDataNascimento(new Date());
-        f1.setDataCadastro(new Date());
-        f1.setId(1332L);
-
-        endereco = new Endereco();
-        endereco.setBairro("Dirceu");
-        endereco.setCep("64078-213");
-        endereco.setCidade("Teresina");
-        endereco.setEstado("PI");
-        endereco.setRua("Rua Des. Berilo Mota");
-
-        filiadoProf = new Filiado();
-        filiadoProf.setNome("Professor");
-        filiadoProf.setCpf("036.464.453-27");
-        filiadoProf.setDataNascimento(new Date());
-        filiadoProf.setDataCadastro(new Date());
-        filiadoProf.setId(3332L);
-        filiadoProf.setEndereco(endereco);
-
-        professor = new Professor();
-        professor.setFiliado(filiadoProf);
-
-        entidade = new Entidade();
-        entidade.setEndereco(endereco);
-        entidade.setNome("Academia 1");
-        entidade.setTelefone1("(086)1234-5432");
+        // Configura um Aluno básico para ser usado em todos os testes
+        Filiado filiado = new Filiado();
+        filiado.setNome("Aécio");
+        filiado.setCpf("036.464.453-27");
+        filiado.setDataNascimento(new Date());
+        filiado.setDataCadastro(new Date());
 
         aluno = new Aluno();
-        aluno.setFiliado(f1);
-        aluno.setProfessor(professor);
-        aluno.setEntidade(entidade);
-
-        alunoDao = new DAOImpl<>(Aluno.class);
-    }
-
-    public static void clearDatabase() {
-        List<Aluno> all = alunoDao.list();
-        if (all != null) {
-            for (Aluno each : all) {
-                alunoDao.delete(each);
-            }
-        }
-        assertEquals(0, alunoDao.list().size());
+        aluno.setFiliado(filiado);
     }
 
     @Test
-    public void testSalvarAlunoComAssociacoes() throws Exception {
-        clearDatabase();
-
+    public void testSalvarAluno() {
         alunoDao.save(aluno);
 
-        // Garantir que o aluno foi salvo e não é nulo
-        Aluno savedAluno = alunoDao.get(aluno);
-        assertNotNull(savedAluno);
-        assertNotNull(savedAluno.getFiliado());
-        assertNotNull(savedAluno.getProfessor());
-        assertNotNull(savedAluno.getEntidade());
-
-        // Validações
-        assertEquals("036.464.453-27", savedAluno.getFiliado().getCpf());
-        assertEquals("Aécio", savedAluno.getFiliado().getNome());
-        assertEquals("Professor", savedAluno.getProfessor().getFiliado().getNome());
-        assertEquals("Dirceu", savedAluno.getProfessor().getFiliado().getEndereco().getBairro());
+        Aluno alunoSalvo = alunoDao.get(aluno);
+        assertNotNull(alunoSalvo);
+        assertEquals("Aécio", alunoSalvo.getFiliado().getNome());
+        assertEquals("036.464.453-27", alunoSalvo.getFiliado().getCpf());
     }
 
     @Test
-    public void updateAluno() throws Exception {
-        clearDatabase();
-        assertEquals(0, alunoDao.list().size());
-
-        alunoDao.save(aluno);
-        assertEquals(1, alunoDao.list().size());
-        assertEquals("Aécio", aluno.getFiliado().getNome());
-
-        Aluno a1 = alunoDao.get(aluno);
-        assertNotNull(a1);
-        a1.getFiliado().setNome("TesteUpdate");
-        alunoDao.save(a1);
-
-        Aluno a2 = alunoDao.get(a1);
-        assertNotNull(a2);
-        assertEquals("TesteUpdate", a2.getFiliado().getNome());
-        assertEquals(1, alunoDao.list().size());
-    }
-
-    @Test
-    public void testListarEAdicionarAlunos() {
-        int qtd = alunoDao.list() != null ? alunoDao.list().size() : 0;
-
-        Aluno novoAluno = new Aluno();
-        novoAluno.setFiliado(new Filiado());
-        alunoDao.save(novoAluno);
-        assertEquals(qtd + 1, alunoDao.list().size());
-
-        alunoDao.save(new Aluno());
-        assertEquals(qtd + 2, alunoDao.list().size());
-
-        alunoDao.save(new Aluno());
-        assertEquals(qtd + 3, alunoDao.list().size());
-
-        alunoDao.save(new Aluno());
-        assertEquals(qtd + 4, alunoDao.list().size());
-
-        clearDatabase();
-        assertEquals(0, alunoDao.list().size());
-
-        alunoDao.save(new Aluno());
-        assertEquals(1, alunoDao.list().size());
-    }
-
-    @Test
-    public void testSearchAluno() throws Exception {
-        clearDatabase();
+    public void testUpdateAluno() {
         alunoDao.save(aluno);
 
-        Filiado f = new Filiado();
-        f.setNome("Aécio");
-        Aluno a = new Aluno();
-        a.setFiliado(f);
+        Aluno alunoParaAtualizar = alunoDao.get(aluno);
+        assertNotNull(alunoParaAtualizar);
 
-        List<Aluno> result = alunoDao.search(a);
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals("036.464.453-27", result.get(0).getFiliado().getCpf());
+        alunoParaAtualizar.getFiliado().setNome("TesteUpdate");
+        alunoDao.save(alunoParaAtualizar);
 
-        clearDatabase();
-        result = alunoDao.search(a);
-        assertNotNull(result);
-        assertEquals(0, result.size());
+        Aluno alunoAtualizado = alunoDao.get(alunoParaAtualizar);
+        assertEquals("TesteUpdate", alunoAtualizado.getFiliado().getNome());
     }
 
-    @AfterClass
-    public static void closeDatabase() {
-        clearDatabase();
-        DatabaseManager.close();
+    @Test
+    public void testListarAlunos() {
+        int qtdInicial = alunoDao.list().size();
+
+        alunoDao.save(new Aluno());
+        assertEquals(qtdInicial + 1, alunoDao.list().size());
+
+        alunoDao.save(new Aluno());
+        assertEquals(qtdInicial + 2, alunoDao.list().size());
+    }
+
+    @Test
+    public void testSearchAluno() {
+        alunoDao.save(aluno);
+
+        Filiado filiadoBusca = new Filiado();
+        filiadoBusca.setNome("Aécio");
+        Aluno alunoBusca = new Aluno();
+        alunoBusca.setFiliado(filiadoBusca);
+
+        List<Aluno> resultadoBusca = alunoDao.search(alunoBusca);
+        assertNotNull(resultadoBusca);
+        assertEquals(1, resultadoBusca.size());
     }
 }

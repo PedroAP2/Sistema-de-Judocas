@@ -32,7 +32,7 @@ jobs:
       run: mvn clean install
 
     - name: Execute Tests
-      run: mvn -B package --file pom.xml
+      run: mvn test
 
     - name: JaCoCo report
       run: mvn jacoco:report

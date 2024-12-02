@@ -168,11 +168,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
                 <configuration>
+                    <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
                     </includes>
-                    <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
                 </configuration>
             </plugin>
         </plugins>

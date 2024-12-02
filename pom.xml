@@ -13,6 +13,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>genesis-repo</id>
+            <url>https://github.com/PedroAP2/Sistema-de-Judocas/tree/maven/lib/genesis</url>
+        </repository>
+    </repositories>
     <dependencies>
         
         <dependency>

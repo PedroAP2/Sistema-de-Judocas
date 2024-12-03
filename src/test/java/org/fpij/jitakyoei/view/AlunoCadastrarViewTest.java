@@ -34,7 +34,7 @@ public class AlunoCadastrarViewTest {
         when(facadeMock.createAluno(any(Aluno.class))).thenReturn(null); // Simula o método da fachada
 
         // Obtém o botão "Cadastrar" e simula o clique
-        JButton cadastrarButton = view.getCadastrarButton();
+        JButton cadastrarButton = view.getCadastrarButton(); // Usa o método exposto na classe
         cadastrarButton.doClick(); // Simula o clique no botão
 
         // Verifica se o método correto foi chamado
